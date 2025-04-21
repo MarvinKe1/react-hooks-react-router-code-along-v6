@@ -1,31 +1,34 @@
-import { useState, useEffect } from "react";
-import UserCard from "../components/UserCard";
+// src/pages/Home.js
+
+import React, { useEffect, useState } from 'react';
+import UserCard from '../components/UserCard';
+import { Link } from 'react-router-dom';
+import Navbar from '../components/Navbar';  // Import Navbar component
 
 function Home() {
-  const [users, setUsers] = useState([])
+  const [users, setUsers] = useState([]);
 
-  useEffect(() =>{
-    fetch("http://localhost:4000/users")
-      .then(r => r.json())
+  useEffect(() => {
+    fetch("http://localhost:3000/users")
+      .then(res => res.json())
       .then(data => setUsers(data))
-      .catch(error => console.error(error));
+      .catch(err => console.error("Failed to fetch users:", err));
   }, []);
-  
-  const userList = users.map(user =>{
-    return <UserCard key={user.id} user={user}/>
-  });
 
   return (
-    <>
-      <header>
-        {/* place NavBar here */}
-      </header>
-      <main>
-        <h1>Home!</h1>
-        {userList}
-      </main>
-    </>
+    <div>
+      <Navbar />  {/* Add Navbar component here */}
+
+      <h1>All Users</h1>
+      <Link to="/add">Add User</Link>
+      <div>
+        {users.map(user => (
+          <UserCard key={user.id} user={user} />
+        ))}
+      </div>
+    </div>
   );
-};
+}
 
 export default Home;
+

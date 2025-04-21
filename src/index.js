@@ -1,6 +1,10 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import Home from "./pages/Home";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import AppRoutes from './route';
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<Home />);
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <AppRoutes />
+  </React.StrictMode>
+);
